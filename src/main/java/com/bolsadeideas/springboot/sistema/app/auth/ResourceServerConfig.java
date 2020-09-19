@@ -37,18 +37,18 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 															 "/api/uploads/imgcliente/**",
 															 "/api/uploads/imgproducto/**",
 															 "/api/uploads/imguser/**",
-															 "/images/**").permitAll()
+															 "/images/**").permitAll();
 		/*.antMatchers(HttpMethod.GET, "/api/clientes/{id}").hasAnyRole("USER", "ADMIN")
 		.antMatchers(HttpMethod.POST, "/api/clientes/uploadimgcliente").hasAnyRole("USER", "ADMIN")
 		.antMatchers(HttpMethod.POST, "/api/clientes").hasRole("ADMIN")
 		.antMatchers("/api/clientes/**").hasRole("ADMIN")*/
-		.anyRequest().authenticated();
+		
 	}
 	
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "*"));
+		config.setAllowedOrigins(Arrays.asList( "*"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));

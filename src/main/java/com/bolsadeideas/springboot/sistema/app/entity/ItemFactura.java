@@ -13,59 +13,55 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+
 @Entity
 @Table(name = "facturas_items")
 public class ItemFactura implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private Integer cantidad;
+    private Integer cantidad;
 
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "producto_id")
-	private Producto producto;
-	
-	
-	public Double getImporte() {
-		return cantidad.doubleValue() * producto.getPrecio();
-	}
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
 
-	public Double getGanancia() {
-		return cantidad.doubleValue() * (producto.getPrecio()-producto.getPrecioCompra());
-	}
+    public Double getImporte() {
+        return cantidad.doubleValue() * producto.getPrecio();
+    }
 
-	
-	/*
-	 * metodos get y set
-	 */
+    public Double getGanancia() {
+        return cantidad.doubleValue() * (producto.getPrecio() - producto.getPrecioCompra());
+    }
 
-	public Long getId() {
-		return id;
-	}
+    // < -- metodos get y set Inicio-->
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Integer getCantidad() {
-		return cantidad;
-	}
+    public Integer getCantidad() {
+        return cantidad;
+    }
 
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
-	}
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
 
-	
-	public Producto getProducto() {
-		return producto;
-	}
+    public Producto getProducto() {
+        return producto;
+    }
 
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
 
-	private static final long serialVersionUID = 1L;
+    // < -- metodos get y set Fin-->
+    private static final long serialVersionUID = 1L;
 }

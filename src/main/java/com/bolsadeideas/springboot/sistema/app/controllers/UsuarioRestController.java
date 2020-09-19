@@ -45,7 +45,7 @@ import com.bolsadeideas.springboot.sistema.app.services.IUsuarioService;
 
 
 
-@CrossOrigin(origins = { "http://localhost:4200", "*" })
+@CrossOrigin(origins = {  "*" })
 @RestController
 @RequestMapping("/api")
 public class UsuarioRestController {

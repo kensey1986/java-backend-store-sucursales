@@ -36,7 +36,7 @@ import com.bolsadeideas.springboot.sistema.app.services.IReporteService;
 
 
 
-@CrossOrigin(origins = { "http://localhost:4200", "*" })
+@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
 public class ReporteRestController {
@@ -139,6 +139,9 @@ public class ReporteRestController {
 			reporteActual.setNombre(reporte.getNombre());
 			reporteActual.setCantidad(reporte.getCantidad());
 			reporteActual.setDescripcion(reporte.getDescripcion());
+			reporteActual.setCreateAt(reporte.getCreateAt());
+			reporteActual.setFechaModificado(reporte.getFechaModificado());
+			
 			reporteUpdated = reporteService.save(reporteActual);
 
 		} catch (DataAccessException e) {

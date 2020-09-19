@@ -33,7 +33,7 @@ import com.bolsadeideas.springboot.sistema.app.services.IRegionService;
 
 
 
-@CrossOrigin(origins = { "http://localhost:4200", "*" })
+@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
 public class RegionRestController {

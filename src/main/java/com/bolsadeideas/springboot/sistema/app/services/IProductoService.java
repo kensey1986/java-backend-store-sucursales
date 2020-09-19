@@ -1,10 +1,12 @@
 package com.bolsadeideas.springboot.sistema.app.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import com.bolsadeideas.springboot.sistema.app.entity.Categoria;
+
+
 import com.bolsadeideas.springboot.sistema.app.entity.Producto;
 
 
@@ -22,8 +24,8 @@ public interface IProductoService {
 	
 	public void delete(Long id);
 	
-	public List<Categoria> findAllCategorias();
-	
 	public List<Producto> findByNombre(String term);
+	
+	public List<Producto> buscarPorRangosFecha(Date f1, Date f2);
 
 }

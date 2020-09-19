@@ -3,6 +3,7 @@ package com.bolsadeideas.springboot.sistema.app.controllers;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Date;
+// import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,15 +37,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.bolsadeideas.springboot.sistema.app.entity.Categoria;
 import com.bolsadeideas.springboot.sistema.app.entity.Producto;
 import com.bolsadeideas.springboot.sistema.app.services.IProductoService;
 import com.bolsadeideas.springboot.sistema.app.services.IUploadFileService;
 
 
 
-@CrossOrigin(origins = { "http://localhost:4200", "*" })
+@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/api")
 public class ProductoRestController {
@@ -161,7 +161,9 @@ public class ProductoRestController {
 			productoActual.setPrecio(producto.getPrecio());
 			productoActual.setPrecioCompra(producto.getPrecioCompra());
 			productoActual.setCantidad(producto.getCantidad());
-			productoActual.setCreateAt(new Date());
+			productoActual.setCreateAt(producto.getCreateAt());
+			productoActual.setFechaVenta(producto.getFechaVenta());
+			
 
 			productoUpdated = productoService.save(productoActual);
 
@@ -264,9 +266,9 @@ public class ProductoRestController {
 	}
 	
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
-	@GetMapping("/productos/categorias")
-	public List<Categoria> listarCategorias(){
-		return productoService.findAllCategorias();
+	@GetMapping("/productos/fecha1/{f1}/fecha2/{f2}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Producto> buscarPorRangosFecha(@PathVariable @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) Date f1, @PathVariable @DateTimeFormat(iso=DateTimeFormat.ISO.DATE) Date f2) {
+		return productoService.buscarPorRangosFecha(f1, f2);
 	}
 }

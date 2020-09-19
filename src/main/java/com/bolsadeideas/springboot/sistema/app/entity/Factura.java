@@ -23,183 +23,168 @@ import javax.persistence.TemporalType;
 //import javax.validation.constraints.NotEmpty;
 //import javax.validation.constraints.Size;
 //import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotEmpty;
+// import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 
 @Entity
 @Table(name = "facturas")
 public class Factura implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	/*
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    /*
 	@NotEmpty(message = "No puede estar vacio")
 	@Size(min = 3, max = 20, message = "el tamaño debe estar entre 3 y 20 caracteres")
 	@Column(nullable = false)*/
-	private String descripcion;
+    private String descripcion;
 
-	private String observacion;
-	
-	private Double descuento;
-	
-        @Column(name = "numero_factura")
-	private Integer numeroFactura;
-	
-	@Column(name = "total_ganancia")
-	private Double totalGanancia;
-	
-	
-	
-	//@NotNull(message = "No Hay Usuario valido")
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usuario_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Usuario usuario;	
-	
-	//@Temporal(TemporalType.DATE)
-	// @Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_at")
-	@Temporal(TemporalType.DATE)
-	private Date createAt;
+    private String observacion;
 
-	@JsonIgnoreProperties(value={"facturas", "hibernateLazyInitializer", "handler"}, allowSetters=true)
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Cliente cliente;
+    private Double descuento;
 
-	@JsonIgnoreProperties(value={ "hibernateLazyInitializer", "handler" }, allowSetters=true)
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "factura_id")
-	private List<ItemFactura> items;
+    @Column(name = "numero_factura")
+    private Integer numeroFactura;
 
-	public Factura() {
-		items = new ArrayList<>();
-	}
-	
-	
-	@PrePersist
-	public void prePersist() {
-		this.createAt = new Date();
-	}
-	
-	
-	/**** operaciones ***/
-	public Double getTotal() {
-		Double total = 0.00;
-		for (ItemFactura item : items) {
-			total += item.getImporte();
-		}
-		if(descuento!=null) {
-			total = total-descuento;
-					
-		}
-		return total;
-	}
-	
-	public Double getTotalGanancia() {
-		Double total = 0.00;
-		for (ItemFactura item : items) {
-			total += item.getGanancia();
-		}
-		if(descuento!=null) {
-			total = total-descuento;
-		}
-		return total;
-	}
-	
-	
-	
-	/*
-	 * metodos get y set
-	 */
-	public Long getId() {
-		return id;
-	}
+    @Column(name = "total_ganancia")
+    private Double totalGanancia;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    //@NotNull(message = "No Hay Usuario valido")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Usuario usuario;
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    //@Temporal(TemporalType.DATE)
+    // @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_at")
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    @JsonIgnoreProperties(value = {"facturas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cliente cliente;
 
-	public String getObservacion() {
-		return observacion;
-	}
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "factura_id")
+    private List<ItemFactura> items;
 
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
-	}
+    public Factura() {
+        items = new ArrayList<>();
+    }
 
-	public Date getCreateAt() {
-		return createAt;
-	}
+    @PrePersist
+    public void prePersist() {
+        this.createAt = new Date();
+    }
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
+    /**
+     * ** operaciones **
+     */
+    public Double getTotal() {
+        Double total = 0.00;
+        for (ItemFactura item : items) {
+            total += item.getImporte();
+        }
+        if (descuento != null) {
+            total = total - descuento;
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+        }
+        return total;
+    }
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+    public Double getTotalGanancia() {
+        Double total = 0.00;
+        for (ItemFactura item : items) {
+            total += item.getGanancia();
+        }
+        if (descuento != null) {
+            total = total - descuento;
+        }
+        return total;
+    }
+    
+    // < -- metodos get y set Inicio-->
 
-	public List<ItemFactura> getItems() {
-		return items;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setItems(List<ItemFactura> items) {
-		this.items = items;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	
-	
-	
-	public Double getDescuento() {
-		return descuento;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public Integer getNumeroFactura() {
-		return numeroFactura;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
+    public String getObservacion() {
+        return observacion;
+    }
 
-	public void setNumeroFactura(Integer numeroFactura) {
-		this.numeroFactura = numeroFactura;
-	}
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
 
+    public Double getDescuento() {
+        return descuento;
+    }
 
-	public void setDescuento(Double descuento) {
-		this.descuento = descuento;
-	}
+    public void setDescuento(Double descuento) {
+        this.descuento = descuento;
+    }
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+    public Integer getNumeroFactura() {
+        return numeroFactura;
+    }
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+    public void setNumeroFactura(Integer numeroFactura) {
+        this.numeroFactura = numeroFactura;
+    }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
+    public Date getCreateAt() {
+        return createAt;
+    }
 
-	public void setTotalGanancia(Double totalGanancia) {
-		this.totalGanancia = totalGanancia;
-	}
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
 
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
+    public List<ItemFactura> getItems() {
+        return items;
+    }
 
-	private static final long serialVersionUID = 1L;
+    public void setItems(List<ItemFactura> items) {
+        this.items = items;
+    }
+        
+        
+        // < -- metodos get y set Fin-->
+
+    private static final long serialVersionUID = 1L;
 }

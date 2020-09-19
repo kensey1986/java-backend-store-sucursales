@@ -19,64 +19,57 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 
-
-
 @Entity
 @Table(name = "regiones")
 public class Region implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-		
-	@NotEmpty(message = "No puede estar vacio")
-	@Size(min = 3, max = 20, message = "el tamaño debe estar entre 3 y 20 caracteres")
-	@Column(nullable = false)
-	private String nombre;
-	
-		
-	
-	@PrePersist
-	public void prePersist() {
-		createAt = new Date();
-	}
-	
-	
-	@Column(name = "create_at")
-	@Temporal(TemporalType.DATE)
-	private Date createAt;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @NotEmpty(message = "No puede estar vacio")
+    @Size(min = 3, max = 20, message = "el tamaño debe estar entre 3 y 20 caracteres")
+    @Column(nullable = false, unique = true)
+    private String nombre;
 
+    @PrePersist
+    public void prePersist() {
+        createAt = new Date();
+    }
 
+    @Column(name = "create_at")
+    @Temporal(TemporalType.DATE)
+    private Date createAt;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    // < -- metodos get y set Inicio-->
+    public Long getId() {
+        return id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	public Date getCreateAt() {
-		return createAt;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-		
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    // < -- metodos get y set Fin-->
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
 }
