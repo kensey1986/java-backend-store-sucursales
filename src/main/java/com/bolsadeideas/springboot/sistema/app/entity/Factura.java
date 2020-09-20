@@ -27,8 +27,6 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-
 @Entity
 @Table(name = "facturas")
 public class Factura implements Serializable {
@@ -52,6 +50,9 @@ public class Factura implements Serializable {
 
     @Column(name = "total_ganancia")
     private Double totalGanancia;
+
+    @Column(name = "total_factura")
+    private Double totalFactura;
 
     //@NotNull(message = "No Hay Usuario valido")
     @OneToOne(fetch = FetchType.LAZY)
@@ -85,32 +86,19 @@ public class Factura implements Serializable {
 
     /**
      * ** operaciones **
+     *
+     * public Double getTotal() { Double total = 0.00; for (ItemFactura item :
+     * items) { total += item.getImporte(); } if (descuento != null) { total =
+     * total - descuento;
+     *
+     * }
+     * return total; }
+     *
+     * public Double getTotalGanancia() { Double total = 0.00; for (ItemFactura
+     * item : items) { total += item.getGanancia(); } if (descuento != null) {
+     * total = total - descuento; } return total; }
      */
-    public Double getTotal() {
-        Double total = 0.00;
-        for (ItemFactura item : items) {
-            total += item.getImporte();
-        }
-        if (descuento != null) {
-            total = total - descuento;
-
-        }
-        return total;
-    }
-
-    public Double getTotalGanancia() {
-        Double total = 0.00;
-        for (ItemFactura item : items) {
-            total += item.getGanancia();
-        }
-        if (descuento != null) {
-            total = total - descuento;
-        }
-        return total;
-    }
-    
     // < -- metodos get y set Inicio-->
-
     public Long getId() {
         return id;
     }
@@ -182,9 +170,25 @@ public class Factura implements Serializable {
     public void setItems(List<ItemFactura> items) {
         this.items = items;
     }
-        
-        
-        // < -- metodos get y set Fin-->
 
+    public Double getTotalGanancia() {
+        return totalGanancia;
+    }
+
+    public void setTotalGanancia(Double totalGanancia) {
+        this.totalGanancia = totalGanancia;
+    }
+
+    public Double getTotalFactura() {
+        return totalFactura;
+    }
+
+    public void setTotalFactura(Double totalFactura) {
+        this.totalFactura = totalFactura;
+    }
+
+   
+
+    // < -- metodos get y set Fin-->
     private static final long serialVersionUID = 1L;
 }

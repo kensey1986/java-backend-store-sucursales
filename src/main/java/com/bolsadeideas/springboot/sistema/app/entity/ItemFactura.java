@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import javax.persistence.Column;
 
 @Entity
 @Table(name = "facturas_items")
@@ -29,6 +29,15 @@ public class ItemFactura implements Serializable {
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
+    @Column(name = "precio_vendido")
+    private Double precioVendido;
+
+    @Column(name = "precio_comprado")
+    private Double precioComprado;
+
+    private Double importe;
+
+    /*
     public Double getImporte() {
         return cantidad.doubleValue() * producto.getPrecio();
     }
@@ -36,7 +45,7 @@ public class ItemFactura implements Serializable {
     public Double getGanancia() {
         return cantidad.doubleValue() * (producto.getPrecio() - producto.getPrecioCompra());
     }
-
+     */
     // < -- metodos get y set Inicio-->
     public Long getId() {
         return id;
@@ -60,6 +69,30 @@ public class ItemFactura implements Serializable {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    public Double getPrecioVendido() {
+        return precioVendido;
+    }
+
+    public void setPrecioVendido(Double precioVendido) {
+        this.precioVendido = precioVendido;
+    }
+
+    public Double getPrecioComprado() {
+        return precioComprado;
+    }
+
+    public void setPrecioComprado(Double precioComprado) {
+        this.precioComprado = precioComprado;
+    }
+
+    public Double getImporte() {
+        return importe;
+    }
+
+    public void setImporte(Double importe) {
+        this.importe = importe;
     }
 
     // < -- metodos get y set Fin-->
