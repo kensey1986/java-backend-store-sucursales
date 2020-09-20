@@ -1,14 +1,20 @@
 package com.bolsadeideas.springboot.sistema.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -65,6 +71,17 @@ public class Sucursal implements Serializable {
     private Date createAt;
     
     
+    // <-- relacion entre tablas Inicio-->
+    
+    @JsonIgnoreProperties(value = {"sucursal", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
+    private List<Factura> facturas;
+
+    public Sucursal() {
+        this.facturas = new ArrayList<Factura>();
+    }
+    
+    // <-- relacion entre tablas Fin-->
     //<-- metodos get y set Inicio-->
 
     public Long getId() {
@@ -177,6 +194,14 @@ public class Sucursal implements Serializable {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public List<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(List<Factura> facturas) {
+        this.facturas = facturas;
     }
     
     

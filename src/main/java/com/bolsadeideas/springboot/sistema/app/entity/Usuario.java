@@ -25,6 +25,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.ArrayList;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -89,13 +91,7 @@ public class Usuario implements Serializable {
 
     private String foto;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"),
-            uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"usuario_id", "role_id"})})
-    private List<Role> roles;
-
+   
     @PrePersist
     public void prePersist() {
         createAt = new Date();
@@ -104,19 +100,39 @@ public class Usuario implements Serializable {
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
+    
+    // <-- inicio relacion entre tablas -->
+    
+    @JsonIgnoreProperties(value = {"usuario", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Factura> facturas;
 
+    public Usuario() {
+        this.facturas = new ArrayList<Factura>();
+    }
+    
+     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"),
+            uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"usuario_id", "role_id"})})
+    private List<Role> roles;
+
+   
     @NotNull(message = "El Barrio No Puede Ser invalido")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Region region;
-
+    
+    /*
     @NotNull(message = "La sucursal No Puede Ser invalido")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sucursal_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Sucursal sucursal;
-
+    private Sucursal sucursal; */
+    
+      // <-- fin relacion entre tablas -->
     // < -- metodos get y set Inicio-->
     public Long getId() {
         return id;
@@ -254,13 +270,15 @@ public class Usuario implements Serializable {
         this.region = region;
     }
 
-    public Sucursal getSucursal() {
-        return sucursal;
+    public List<Factura> getFacturas() {
+        return facturas;
     }
 
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
+    public void setFacturas(List<Factura> facturas) {
+        this.facturas = facturas;
     }
+    
+    
 
     // < -- metodos get y set Fin-->
     /**

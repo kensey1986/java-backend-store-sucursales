@@ -53,22 +53,32 @@ public class Factura implements Serializable {
 
     @Column(name = "total_factura")
     private Double totalFactura;
-
-    //@NotNull(message = "No Hay Usuario valido")
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Usuario usuario;
-
+    
     //@Temporal(TemporalType.DATE)
     // @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
+    
+    @PrePersist
+    public void prePersist() {
+        this.createAt = new Date();
+    }
+     // <-- inicio relacion entre tablas -->
+    
+    @JsonIgnoreProperties(value = {"facturas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Usuario usuario;
+
+    
 
     @JsonIgnoreProperties(value = {"facturas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
+    
+    @JsonIgnoreProperties(value = {"facturas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Sucursal sucursal;
 
     @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, allowSetters = true)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -78,11 +88,9 @@ public class Factura implements Serializable {
     public Factura() {
         items = new ArrayList<>();
     }
-
-    @PrePersist
-    public void prePersist() {
-        this.createAt = new Date();
-    }
+    
+     // <-- inicio relacion entre tablas -->
+    
 
     /**
      * ** operaciones **
@@ -187,7 +195,14 @@ public class Factura implements Serializable {
         this.totalFactura = totalFactura;
     }
 
-   
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
 
     // < -- metodos get y set Fin-->
     private static final long serialVersionUID = 1L;

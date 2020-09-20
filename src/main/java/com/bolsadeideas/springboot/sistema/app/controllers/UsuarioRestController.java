@@ -172,7 +172,7 @@ public class UsuarioRestController {
                         }
 			usuarioActual.setEmail(usuario.getEmail());
 			usuarioActual.setRegion(usuario.getRegion());
-			usuarioActual.setSucursal(usuario.getSucursal());
+			// usuarioActual.setSucursal(usuario.getSucursal());
 			usuarioActual.setFecha(usuario.getFecha());
 			usuarioActual.setDireccion(usuario.getDireccion());
 			usuarioActual.setTelefono(usuario.getTelefono());
