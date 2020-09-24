@@ -18,10 +18,6 @@ public interface IUsuarioDao extends JpaRepository<Usuario, Long>{
 	@Query("select u from Usuario u where u.username=?1")
 	public Usuario findByUsername2(String username);
 	
-	
-	
-	
-	
 	@Query("from Role")
 	public List<Role> findAllRoles();
 	

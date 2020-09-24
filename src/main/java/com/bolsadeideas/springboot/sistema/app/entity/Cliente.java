@@ -25,6 +25,7 @@ import javax.validation.constraints.NotEmpty;
 //import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /**
@@ -65,10 +66,11 @@ public class Cliente implements Serializable {
 	 * un cliente puede tiene una region pero una region puede tener muchos clientes
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id")
+    @JoinColumn(nullable = false, name = "region_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Region region;
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date fecha;
 

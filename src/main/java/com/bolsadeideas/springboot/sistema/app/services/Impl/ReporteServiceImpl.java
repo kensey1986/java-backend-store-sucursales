@@ -53,31 +53,8 @@ public class ReporteServiceImpl implements IReporteService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Reporte> buscarPorRangosFecha(Date f1, Date f2) {
-			return reporteDao.buscarPorRangosFecha(f1, f2);
+	public List<Reporte> findByCreateAtBetween(Date f1, Date f2) {
+			return reporteDao.findByCreateAtBetween(f1, f2);
 	}
-
-	
-	 @Override
-	@Transactional(readOnly = true)
-	public List<Producto> findByNombre(String nombre) {
-		
-		return reporteDao.findByNombreStartingWithIgnoreCase(nombre);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public List<Reporte> buscarPorFecha(Date f1) {
-		
-		return reporteDao.buscarPorFecha(f1);
-	}
-
-	@Override
-	public List<Reporte> findFirstByOrderByIdDesc() {
-	
-		return reporteDao.findFirstByOrderByIdDesc();
-	}
-	 
-	
 
 }

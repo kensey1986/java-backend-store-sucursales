@@ -26,12 +26,10 @@ public interface IFacturaService {
 	
 	
 	
-	public List<Cliente> findByDescripcion(String descripcion);
-	
-	public List<Factura> buscarPorRangosFecha(Date f1, Date f2);
-	
-	public List<Factura> buscarPorFecha(Date f1);
 	
 	public List<Factura> findFirstByOrderByIdDesc();
+        
+        
+        public List<Factura> findByCreateAtBetween(Date f1, Date f2);
 
 }

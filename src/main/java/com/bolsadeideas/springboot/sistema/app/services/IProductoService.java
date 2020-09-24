@@ -26,6 +26,6 @@ public interface IProductoService {
 	
 	public List<Producto> findByNombre(String term);
 	
-	public List<Producto> buscarPorRangosFecha(Date f1, Date f2);
+	public List<Producto> findByCreateAtBetween(Date f1, Date f2);
 
 }

@@ -14,9 +14,9 @@ import com.bolsadeideas.springboot.sistema.app.services.IProductoService;
 public class ProductoServiceImpl implements IProductoService {
 
     @Override
-    public List<Producto> buscarPorRangosFecha(Date f1, Date f2) {
+    public List<Producto> findByCreateAtBetween(Date f1, Date f2) {
         // TODO Auto-generated method stub
-        return productoDao.buscarPorRangosFecha(f1, f2);
+        return productoDao.findByCreateAtBetween(f1, f2);
     }
 
     @Autowired
@@ -56,7 +56,7 @@ public class ProductoServiceImpl implements IProductoService {
     @Override
     @Transactional(readOnly = true)
     public List<Producto> findByNombre(String term) {
-        System.out.println("llegando clas impl " + term);
+        
         return productoDao.findByNombre(term);
     }
     //return productoDao.findByNombreStartingWithIgnoreCase(term);

@@ -75,11 +75,18 @@ public class Sucursal implements Serializable {
     
     @JsonIgnoreProperties(value = {"sucursal", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
+    private List<Usuario> usuarios;
+    
+    @JsonIgnoreProperties(value = {"sucursal", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
     private List<Factura> facturas;
 
     public Sucursal() {
-        this.facturas = new ArrayList<Factura>();
+        this.usuarios = usuarios;
+        this.facturas = facturas;
     }
+
+    
     
     // <-- relacion entre tablas Fin-->
     //<-- metodos get y set Inicio-->
@@ -203,10 +210,15 @@ public class Sucursal implements Serializable {
     public void setFacturas(List<Factura> facturas) {
         this.facturas = facturas;
     }
-    
-    
-    
-    
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
     
     //<-- metodos get y set Fin-->
     /**

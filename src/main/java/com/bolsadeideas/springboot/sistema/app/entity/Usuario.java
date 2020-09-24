@@ -27,6 +27,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import javax.persistence.OneToMany;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /**
@@ -84,34 +85,46 @@ public class Usuario implements Serializable {
 
     @Column(unique = true)
     private String email;
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Fecha de nacimiento No puede ser Vacia")
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
     private String foto;
 
-   
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PrePersist
     public void prePersist() {
         createAt = new Date();
     }
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
     
     // <-- inicio relacion entre tablas -->
-    
+     /*
     @JsonIgnoreProperties(value = {"usuario", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Factura> facturas;
 
     public Usuario() {
-        this.facturas = new ArrayList<Factura>();
+        this.facturas = facturas;
     }
+  */
+   
     
-     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    
+    
+    @NotNull(message = "El Sucursal No Puede Ser invalido")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sucursal_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Sucursal sucursal;
+    
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"),
             uniqueConstraints = {
@@ -125,14 +138,9 @@ public class Usuario implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Region region;
     
-    /*
-    @NotNull(message = "La sucursal No Puede Ser invalido")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sucursal_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Sucursal sucursal; */
     
-      // <-- fin relacion entre tablas -->
+
+    // <-- fin relacion entre tablas -->
     // < -- metodos get y set Inicio-->
     public Long getId() {
         return id;
@@ -270,15 +278,14 @@ public class Usuario implements Serializable {
         this.region = region;
     }
 
-    public List<Factura> getFacturas() {
-        return facturas;
+    public Sucursal getSucursal() {
+        return sucursal;
     }
 
-    public void setFacturas(List<Factura> facturas) {
-        this.facturas = facturas;
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
-    
-    
+
 
     // < -- metodos get y set Fin-->
     /**

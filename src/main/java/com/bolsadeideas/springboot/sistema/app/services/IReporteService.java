@@ -26,12 +26,6 @@ public interface IReporteService {
 	
 	
 	
-	public List<Producto> findByNombre(String descripcion);
-	
-	public List<Reporte> buscarPorRangosFecha(Date f1, Date f2);
-	
-	public List<Reporte> buscarPorFecha(Date f1);
-	
-	public List<Reporte> findFirstByOrderByIdDesc();
+	public List<Reporte> findByCreateAtBetween(Date f1, Date f2);
 
 }

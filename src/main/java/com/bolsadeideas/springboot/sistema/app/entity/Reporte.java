@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 //import javax.validation.constraints.Size;
 //import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "reportes")
@@ -47,16 +47,17 @@ public class Reporte implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuario;
 
-    //@Temporal(TemporalType.DATE)
-    // @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_modificado")
     @Temporal(TemporalType.DATE)
     private Date fechaModificado;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PrePersist
     public void prePersist() {
         this.createAt = new Date();

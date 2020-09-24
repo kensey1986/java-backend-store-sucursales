@@ -26,6 +26,8 @@ import javax.persistence.TemporalType;
 // import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "facturas")
@@ -54,23 +56,27 @@ public class Factura implements Serializable {
     @Column(name = "total_factura")
     private Double totalFactura;
     
-    //@Temporal(TemporalType.DATE)
-    // @Temporal(TemporalType.TIMESTAMP)
+     private String usuario;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
     
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PrePersist
     public void prePersist() {
         this.createAt = new Date();
     }
      // <-- inicio relacion entre tablas -->
     
+    /*
     @JsonIgnoreProperties(value = {"facturas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.LAZY)
-    private Usuario usuario;
-
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;*/
     
+  
 
     @JsonIgnoreProperties(value = {"facturas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -147,13 +153,7 @@ public class Factura implements Serializable {
         this.numeroFactura = numeroFactura;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+   
 
     public Date getCreateAt() {
         return createAt;
@@ -203,7 +203,17 @@ public class Factura implements Serializable {
         this.sucursal = sucursal;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
 
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+  
+    
+    
     // < -- metodos get y set Fin-->
     private static final long serialVersionUID = 1L;
 }

@@ -27,6 +27,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -64,16 +65,19 @@ public class Producto implements Serializable {
     private String descripcion;
 
     private String foto;
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PrePersist
     public void prePersist() {
         createAt = new Date();
     }
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha_venta")
     @Temporal(TemporalType.DATE)
     private Date fechaVenta;
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
