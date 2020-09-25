@@ -14,10 +14,12 @@ public class SpringBootSistemaApplication implements CommandLineRunner{
 	private BCryptPasswordEncoder passwordEncoder;*/
 	
 	public static void main(String[] args) {
+                System.out.println("** ----- Server-System-online-OK -----**");
 		SpringApplication.run(SpringBootSistemaApplication.class, args);
 	}
 
-	@Override
+	
+        @Override
 	public void run(String... args) throws Exception {
 		/*
 		String password = "12345";

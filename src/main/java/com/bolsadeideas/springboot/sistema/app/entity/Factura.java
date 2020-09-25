@@ -56,7 +56,7 @@ public class Factura implements Serializable {
     @Column(name = "total_factura")
     private Double totalFactura;
     
-     private String usuario;
+    // private String usuario;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "create_at")
@@ -70,12 +70,11 @@ public class Factura implements Serializable {
     }
      // <-- inicio relacion entre tablas -->
     
-    /*
+ 
+    
     @JsonIgnoreProperties(value = {"facturas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;*/
-    
+    private Usuario usuario;
   
 
     @JsonIgnoreProperties(value = {"facturas", "hibernateLazyInitializer", "handler"}, allowSetters = true)
@@ -203,14 +202,15 @@ public class Factura implements Serializable {
         this.sucursal = sucursal;
     }
 
-    public String getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
+   
   
     
     

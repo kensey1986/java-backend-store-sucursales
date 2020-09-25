@@ -156,8 +156,8 @@ public class SucursalRestController {
 			sucursalActual.setPropietario(sucursal.getPropietario());
 			sucursalActual.setRegimen(sucursal.getRegimen());
 			sucursalActual.setTelefono(sucursal.getTelefono());
-			
-			
+                        sucursalActual.setNumeroFactura(sucursal.getNumeroFactura());
+                        			
 			sucursalUpdated = sucursalService.save(sucursalActual);
 
 		} catch (DataAccessException e) {

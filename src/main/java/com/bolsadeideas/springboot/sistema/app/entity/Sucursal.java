@@ -60,6 +60,9 @@ public class Sucursal implements Serializable {
     private String instagram;
 
     private String geoposicion;
+    
+    @Column(name = "numero_factura")
+    private Integer numeroFactura;
 
     @PrePersist
     public void prePersist() {
@@ -73,16 +76,13 @@ public class Sucursal implements Serializable {
     
     // <-- relacion entre tablas Inicio-->
     
-    @JsonIgnoreProperties(value = {"sucursal", "hibernateLazyInitializer", "handler"}, allowSetters = true)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
-    private List<Usuario> usuarios;
+   
     
     @JsonIgnoreProperties(value = {"sucursal", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
     private List<Factura> facturas;
 
     public Sucursal() {
-        this.usuarios = usuarios;
         this.facturas = facturas;
     }
 
@@ -211,12 +211,12 @@ public class Sucursal implements Serializable {
         this.facturas = facturas;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    public Integer getNumeroFactura() {
+        return numeroFactura;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setNumeroFactura(Integer numeroFactura) {
+        this.numeroFactura = numeroFactura;
     }
 
     
