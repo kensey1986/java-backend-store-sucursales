@@ -86,8 +86,8 @@ public class Usuario implements Serializable {
     @Column(unique = true)
     private String email;
     
-    //@DateTimeFormat(pattern = "yyyy-MM-dd")
-    //@NotNull(message = "Fecha de nacimiento No puede ser Vacia")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Fecha de nacimiento No puede ser Vacia")
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
@@ -115,7 +115,7 @@ public class Usuario implements Serializable {
   
    
         
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE )
     @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"),
             uniqueConstraints = {
@@ -279,7 +279,8 @@ public class Usuario implements Serializable {
         this.facturas = facturas;
     }
 
-      
+  
+    
 
     // < -- metodos get y set Fin-->
     /**

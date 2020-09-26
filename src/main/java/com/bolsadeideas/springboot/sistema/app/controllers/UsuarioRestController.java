@@ -117,7 +117,9 @@ public class UsuarioRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 		
-		try {
+		try {   
+                        String passwordBcrypt = passwordEncoder.encode(usuario.getPassword());
+				usuario.setPassword(passwordBcrypt);
 			usuarioNew = usuarioService.save(usuario);
 		} catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");

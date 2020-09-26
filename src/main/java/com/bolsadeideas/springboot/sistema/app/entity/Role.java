@@ -1,14 +1,12 @@
 package com.bolsadeideas.springboot.sistema.app.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -21,10 +19,7 @@ public class Role implements Serializable {
     private Long id;
 
     @Column(unique = true, length = 20)
-    private String nombre;  
-    
-    @ManyToMany(mappedBy = "roles")
-    private List<Usuario> usuario;
+    private String nombre;
 
     // < -- metodos get y set Inicio-->
     public Long getId() {
@@ -43,15 +38,6 @@ public class Role implements Serializable {
         this.nombre = nombre;
     }
 
-    public List<Usuario> getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(List<Usuario> usuario) {
-        this.usuario = usuario;
-    }
-    
-    
     // < -- metodos get y set Fin-->
     /**
      *
