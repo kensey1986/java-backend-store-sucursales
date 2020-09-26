@@ -86,8 +86,8 @@ public class Usuario implements Serializable {
     @Column(unique = true)
     private String email;
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Fecha de nacimiento No puede ser Vacia")
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    //@NotNull(message = "Fecha de nacimiento No puede ser Vacia")
     @Temporal(TemporalType.DATE)
     private Date fecha;
 

@@ -42,6 +42,7 @@ import com.bolsadeideas.springboot.sistema.app.entity.Usuario;
 
 import com.bolsadeideas.springboot.sistema.app.services.IUploadFileService;
 import com.bolsadeideas.springboot.sistema.app.services.IUsuarioService;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Util.println;
 
 
 
@@ -179,6 +180,7 @@ public class UsuarioRestController {
 			usuarioActual.setCelular1(usuario.getCelular1());
 			usuarioActual.setCelular2(usuario.getCelular2());
 			usuarioActual.setEnabled(usuario.getEnabled());
+                        usuarioActual.setRoles(usuario.getRoles());
 
 			usuarioUpdated = usuarioService.save(usuarioActual);
 

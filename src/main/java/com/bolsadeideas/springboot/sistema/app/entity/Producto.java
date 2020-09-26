@@ -27,6 +27,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -81,11 +85,22 @@ public class Producto implements Serializable {
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
+    
+    /*<-- Inicio relacion entre tablas  -->*/
+     
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "productos_sucursal", joinColumns = @JoinColumn(name = "producto_id"),
+            inverseJoinColumns = @JoinColumn(name = "sucursal_id"),
+            uniqueConstraints = {
+                @UniqueConstraint(columnNames = { "producto_id", "sucursal_id"})})
+    private List<Sucursal> sucursales;
+    
 
     @JsonIgnoreProperties(value = {"producto", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Reporte> reportes;
-
+    
+     /*<-- Fin relacion entre tablas  -->*/
     public Producto() {
         this.reportes = new ArrayList<Reporte>();
     }
@@ -178,6 +193,16 @@ public class Producto implements Serializable {
     public void setReportes(List<Reporte> reportes) {
         this.reportes = reportes;
     }
+
+    public List<Sucursal> getSucursales() {
+        return sucursales;
+    }
+
+    public void setSucursales(List<Sucursal> sucursales) {
+        this.sucursales = sucursales;
+    }
+    
+    
 
     // < -- metodos get y set Fin-->
     /**

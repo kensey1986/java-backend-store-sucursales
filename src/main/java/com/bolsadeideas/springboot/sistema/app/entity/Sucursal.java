@@ -76,7 +76,7 @@ public class Sucursal implements Serializable {
     
     // <-- relacion entre tablas Inicio-->
     
-   
+  
     
     @JsonIgnoreProperties(value = {"sucursal", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
