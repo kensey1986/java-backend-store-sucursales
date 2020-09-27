@@ -86,16 +86,12 @@ public class Producto implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createAt;
     
-    /*<-- Inicio relacion entre tablas  -->*/
+    /*<-- Inicio relacion entre tablas  --> */
      
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "productos_sucursal", joinColumns = @JoinColumn(name = "producto_id"),
-            inverseJoinColumns = @JoinColumn(name = "sucursal_id"),
-            uniqueConstraints = {
-                @UniqueConstraint(columnNames = { "producto_id", "sucursal_id"})})
-    private List<Sucursal> sucursales;
-    
-
+    @JsonIgnoreProperties(value = {"producto", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
+    private List<Bodega> bodegas;
+        
     @JsonIgnoreProperties(value = {"producto", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Reporte> reportes;
@@ -103,6 +99,7 @@ public class Producto implements Serializable {
      /*<-- Fin relacion entre tablas  -->*/
     public Producto() {
         this.reportes = new ArrayList<Reporte>();
+         this.bodegas = bodegas;
     }
 
     // < -- metodos get y set Inicio-->
@@ -194,15 +191,14 @@ public class Producto implements Serializable {
         this.reportes = reportes;
     }
 
-    public List<Sucursal> getSucursales() {
-        return sucursales;
+    public List<Bodega> getBodegas() {
+        return bodegas;
     }
 
-    public void setSucursales(List<Sucursal> sucursales) {
-        this.sucursales = sucursales;
+    public void setBodegas(List<Bodega> bodegas) {
+        this.bodegas = bodegas;
     }
-    
-    
+
 
     // < -- metodos get y set Fin-->
     /**

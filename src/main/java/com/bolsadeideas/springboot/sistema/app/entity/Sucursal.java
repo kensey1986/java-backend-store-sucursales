@@ -75,15 +75,20 @@ public class Sucursal implements Serializable {
     
     
     // <-- relacion entre tablas Inicio-->
-    
+    @JsonIgnoreProperties(value = {"sucursal", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
+    private List<Bodega> bodegas;
   
     
     @JsonIgnoreProperties(value = {"sucursal", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
     private List<Factura> facturas;
+    
+    
 
     public Sucursal() {
         this.facturas = facturas;
+        this.bodegas = bodegas;
     }
 
     
@@ -217,6 +222,14 @@ public class Sucursal implements Serializable {
 
     public void setNumeroFactura(Integer numeroFactura) {
         this.numeroFactura = numeroFactura;
+    }
+
+    public List<Bodega> getBodegas() {
+        return bodegas;
+    }
+
+    public void setBodegas(List<Bodega> bodegas) {
+        this.bodegas = bodegas;
     }
 
     

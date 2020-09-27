@@ -8,6 +8,11 @@ INSERT INTO regiones (id, nombre, create_at) VALUES (3, 'Comuneros', '2020-01-01
 
 INSERT INTO sucursales (id, nombre, nit, direccion, telefono, celular1, celular2, propietario, sede, regimen, facebook, instagram, geoposicion, create_at) VALUES (1, 'Bulevar', '1.090.363.231-0', 'Calle 11 Av.0 Centro Comercial Gran Bulevar. Local 143', '5833938', '300 392 2227', '55555555', 'Joiner Obando', 'CLUB GALLERY AIRGUNS COLOMBIA', 'Simplificado', 'Joiner Candado', 'Joiner Candado', 'Cucuta - Colombia', '2018-01-01');
 
+INSERT INTO productos (id, cantidad, codigo, create_at, descripcion, foto, nombre, precio, precio_compra, fecha_venta) VALUES (1, 2, '555', '2020-09-04', 'sdfsd', NULL, 'zapatos', 5000, 500, '2020-09-04');
+
+
+
+/* Populate tabla usuarios roles */
 
 /* Creamos algunos usuarios con sus roles */
 INSERT INTO usuarios (documento, region_id,  username, password, enabled, nombre, apellido, email, fecha, create_at, direccion, celular1) VALUES ('0123456789', 1,    'admin1', '$2a$10$0mE/eqTisi6Gqr0falzenOd3klFZ9TGUJUAOFiiF37F6W4w2SZko6', 1, 'Administrador', 'admin','administrador@bolsadeideas.com', '2018-03-05', '2019-01-01', 'calle alguna # alguno', '3194335815');

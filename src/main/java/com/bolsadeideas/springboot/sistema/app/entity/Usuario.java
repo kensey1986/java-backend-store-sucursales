@@ -113,8 +113,7 @@ public class Usuario implements Serializable {
         this.facturas = facturas;
     }
   
-   
-        
+          
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE )
     @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"),
