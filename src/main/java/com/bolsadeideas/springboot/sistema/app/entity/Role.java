@@ -22,6 +22,7 @@ public class Role implements Serializable {
     private String nombre;
 
     // < -- metodos get y set Inicio-->
+
     public Long getId() {
         return id;
     }
@@ -29,6 +30,9 @@ public class Role implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+   
+    
 
     public String getNombre() {
         return nombre;

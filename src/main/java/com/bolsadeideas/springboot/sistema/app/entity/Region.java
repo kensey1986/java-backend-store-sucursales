@@ -42,6 +42,7 @@ public class Region implements Serializable {
     private Date createAt;
 
     // < -- metodos get y set Inicio-->
+
     public Long getId() {
         return id;
     }
@@ -49,6 +50,9 @@ public class Region implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+   
+    
 
     public String getNombre() {
         return nombre;

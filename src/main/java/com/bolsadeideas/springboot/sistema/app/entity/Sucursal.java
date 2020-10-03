@@ -91,8 +91,8 @@ public class Sucursal implements Serializable {
         this.bodegas = bodegas;
     }
 
-    
-    
+   
+   
     // <-- relacion entre tablas Fin-->
     //<-- metodos get y set Inicio-->
 
@@ -103,7 +103,10 @@ public class Sucursal implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
+    
+    
+    
+    
     public String getNombre() {
         return nombre;
     }

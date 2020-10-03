@@ -95,7 +95,13 @@ public class Factura implements Serializable {
     }
     
      // <-- inicio relacion entre tablas -->
+   
     
+    
+
+    public Long getId() {   
+        return id;
+    }
 
     /**
      * ** operaciones **
@@ -112,10 +118,6 @@ public class Factura implements Serializable {
      * total = total - descuento; } return total; }
      */
     // < -- metodos get y set Inicio-->
-    public Long getId() {
-        return id;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }

@@ -155,11 +155,7 @@ public class ProductoRestController {
             productoActual.setCodigo(producto.getCodigo());
             productoActual.setNombre(producto.getNombre());
             productoActual.setDescripcion(producto.getDescripcion());
-            productoActual.setPrecio(producto.getPrecio());
-            productoActual.setPrecioCompra(producto.getPrecioCompra());
-            productoActual.setCantidad(producto.getCantidad());
-            productoActual.setCreateAt(producto.getCreateAt());
-            productoActual.setFechaVenta(producto.getFechaVenta());
+           
 
             productoUpdated = productoService.save(productoActual);
 
@@ -254,6 +250,7 @@ public class ProductoRestController {
     @GetMapping("/productos/filtrar-productos/{term}")
     @ResponseStatus(HttpStatus.OK)
     public List<Producto> findByNombre(@PathVariable String term) {
+          System.out.println("*Llego con: "+term);
         return productoService.findByNombre(term);
     }
 

@@ -47,6 +47,7 @@ public class ItemFactura implements Serializable {
     }
      */
     // < -- metodos get y set Inicio-->
+
     public Long getId() {
         return id;
     }
@@ -54,6 +55,9 @@ public class ItemFactura implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+  
+    
 
     public Integer getCantidad() {
         return cantidad;

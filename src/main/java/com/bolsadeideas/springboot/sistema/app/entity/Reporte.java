@@ -70,7 +70,6 @@ public class Reporte implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Producto producto;
 
-    // < -- metodos get y set Inicio-->
     public Long getId() {
         return id;
     }
@@ -78,7 +77,8 @@ public class Reporte implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
+    
+   
     public String getNombre() {
         return nombre;
     }

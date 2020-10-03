@@ -37,11 +37,28 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "bodegas")
 public class Bodega implements Serializable {
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+            
+    
+    @Column(nullable = false, unique = true)
+    private String idCompuesto;
+    
+    private String nombre;
     private Integer cantidad;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "fecha_Actualizacion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaActualizacion;
+    
+    @Column(name = "precio_compra")
+    private Double precioCompra;
+    
+     @Column(name = "precio_venta")
+    private Double precioVenta;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "create_at")
@@ -75,6 +92,17 @@ public class Bodega implements Serializable {
         this.id = id;
     }
 
+    public String getIdCompuesto() {
+        return idCompuesto;
+    }
+
+    public void setIdCompuesto(String idCompuesto) {
+        this.idCompuesto = idCompuesto;
+    }
+
+    
+
+   
     public Integer getCantidad() {
         return cantidad;
     }
@@ -105,6 +133,39 @@ public class Bodega implements Serializable {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    public Date getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    public void setFechaActualizacion(Date fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+  
+    public Double getPrecioCompra() {
+        return precioCompra;
+    }
+
+    public void setPrecioCompra(Double precioCompra) {
+        this.precioCompra = precioCompra;
+    }
+
+    public Double getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(Double precioVenta) {
+        this.precioVenta = precioVenta;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     

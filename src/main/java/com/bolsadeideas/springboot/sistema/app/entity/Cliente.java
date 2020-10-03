@@ -92,6 +92,7 @@ public class Cliente implements Serializable {
     }
 
     // < -- metodos get y set Inicio-->
+
     public Long getId() {
         return id;
     }
@@ -100,6 +101,9 @@ public class Cliente implements Serializable {
         this.id = id;
     }
 
+   
+    
+    
     public String getDocumento() {
         return documento;
     }

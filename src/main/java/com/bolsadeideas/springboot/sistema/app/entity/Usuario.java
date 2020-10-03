@@ -127,11 +127,7 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "region_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Region region;
-    
-    
 
-    // <-- fin relacion entre tablas -->
-    // < -- metodos get y set Inicio-->
     public Long getId() {
         return id;
     }
@@ -139,7 +135,10 @@ public class Usuario implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
 
+  
+    
     public String getDocumento() {
         return documento;
     }

@@ -53,17 +53,14 @@ public class Producto implements Serializable {
     @Column(nullable = false, unique = true)
     private String codigo;
 
-    private Double precio;
+   
 
     /*
 	 * @NotEmpty(message = "No puede estar vacio")
 	@Size(min = 3, max = 10, message = "el tamaño debe estar entre 3 y 10 caracteres")
 	 * 
      */
-    @Column(name = "precio_compra")
-    private Double precioCompra;
-
-    private Integer cantidad;
+  
 
     @Size(max = 150, message = "el tamaño maximo  es de 150 caracteres")
     private String descripcion;
@@ -76,10 +73,7 @@ public class Producto implements Serializable {
         createAt = new Date();
     }
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "fecha_venta")
-    @Temporal(TemporalType.DATE)
-    private Date fechaVenta;
+   
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "create_at")
@@ -89,7 +83,7 @@ public class Producto implements Serializable {
     /*<-- Inicio relacion entre tablas  --> */
      
     @JsonIgnoreProperties(value = {"producto", "hibernateLazyInitializer", "handler"}, allowSetters = true)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sucursal", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Bodega> bodegas;
         
     @JsonIgnoreProperties(value = {"producto", "hibernateLazyInitializer", "handler"}, allowSetters = true)
@@ -99,10 +93,11 @@ public class Producto implements Serializable {
      /*<-- Fin relacion entre tablas  -->*/
     public Producto() {
         this.reportes = new ArrayList<Reporte>();
-         this.bodegas = bodegas;
+         this.bodegas = new ArrayList<Bodega>();
     }
 
     // < -- metodos get y set Inicio-->
+
     public Long getId() {
         return id;
     }
@@ -111,6 +106,8 @@ public class Producto implements Serializable {
         this.id = id;
     }
 
+   
+    
     public String getNombre() {
         return nombre;
     }
@@ -125,30 +122,6 @@ public class Producto implements Serializable {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Double getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(Double precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
     }
 
     public String getDescripcion() {
@@ -167,28 +140,13 @@ public class Producto implements Serializable {
         this.foto = foto;
     }
 
-    public Date getFechaVenta() {
-        return fechaVenta;
-    }
-
-    public void setFechaVenta(Date fechaVenta) {
-        this.fechaVenta = fechaVenta;
-    }
-
+   
     public Date getCreateAt() {
         return createAt;
     }
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
-    }
-
-    public List<Reporte> getReportes() {
-        return reportes;
-    }
-
-    public void setReportes(List<Reporte> reportes) {
-        this.reportes = reportes;
     }
 
     public List<Bodega> getBodegas() {
@@ -198,6 +156,15 @@ public class Producto implements Serializable {
     public void setBodegas(List<Bodega> bodegas) {
         this.bodegas = bodegas;
     }
+
+    public List<Reporte> getReportes() {
+        return reportes;
+    }
+
+    public void setReportes(List<Reporte> reportes) {
+        this.reportes = reportes;
+    }
+   
 
 
     // < -- metodos get y set Fin-->
