@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.bolsadeideas.springboot.sistema.app.entity.Bodega;
+import com.bolsadeideas.springboot.sistema.app.entity.Producto;
+import com.bolsadeideas.springboot.sistema.app.entity.Sucursal;
 import com.bolsadeideas.springboot.sistema.app.models.dao.IBodegaDao;
 import com.bolsadeideas.springboot.sistema.app.services.IBodegaService;
 
@@ -50,4 +52,10 @@ public class BodegaServiceImpl implements IBodegaService {
 
   
     //return productoDao.findByNombreStartingWithIgnoreCase(term);
+
+    @Override
+    public Bodega findByProductoAndSucursal(Producto producto, Sucursal sucursal) {
+        return bodegaDao.findByProductoAndSucursal(producto, sucursal);
+         
+    }
 }

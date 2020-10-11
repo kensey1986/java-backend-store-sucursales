@@ -80,6 +80,16 @@ public class Bodega implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Producto producto;
     
+    @JsonIgnoreProperties(value = {"bodega", "hibernateLazyInitializer", "handler"}, allowSetters = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bodega", cascade = CascadeType.ALL)
+    private List<Reporte> reportes;
+    
+     /*<-- Fin relacion entre tablas  -->*/
+    public Bodega() {
+        this.reportes = new ArrayList<Reporte>();
+        
+    }
+    
     // <-- Relacion entre Tablas Fin -->
 
     // < -- metodos get y set Inicio-->
@@ -166,6 +176,14 @@ public class Bodega implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public List<Reporte> getReportes() {
+        return reportes;
+    }
+
+    public void setReportes(List<Reporte> reportes) {
+        this.reportes = reportes;
     }
     
     

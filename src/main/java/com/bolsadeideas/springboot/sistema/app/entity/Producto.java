@@ -86,13 +86,8 @@ public class Producto implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL)
     private List<Bodega> bodegas;
         
-    @JsonIgnoreProperties(value = {"producto", "hibernateLazyInitializer", "handler"}, allowSetters = true)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<Reporte> reportes;
-    
      /*<-- Fin relacion entre tablas  -->*/
     public Producto() {
-        this.reportes = new ArrayList<Reporte>();
          this.bodegas = new ArrayList<Bodega>();
     }
 
@@ -157,14 +152,6 @@ public class Producto implements Serializable {
         this.bodegas = bodegas;
     }
 
-    public List<Reporte> getReportes() {
-        return reportes;
-    }
-
-    public void setReportes(List<Reporte> reportes) {
-        this.reportes = reportes;
-    }
-   
 
 
     // < -- metodos get y set Fin-->

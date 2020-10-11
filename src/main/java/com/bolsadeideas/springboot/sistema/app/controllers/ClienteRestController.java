@@ -39,7 +39,7 @@ import com.bolsadeideas.springboot.sistema.app.entity.Cliente;
 import com.bolsadeideas.springboot.sistema.app.services.IClienteService;
 import com.bolsadeideas.springboot.sistema.app.services.IUploadFileService;
 
-@CrossOrigin(origins = {"*"})
+@CrossOrigin(origins = {"192.168.43.2:8089"})
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {

@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 
 
 import com.bolsadeideas.springboot.sistema.app.entity.Bodega;
+import com.bolsadeideas.springboot.sistema.app.entity.Producto;
+import com.bolsadeideas.springboot.sistema.app.entity.Sucursal;
 
 
  
@@ -23,6 +25,8 @@ public interface IBodegaService {
 	public Bodega save(Bodega Bodega);
 	
 	public void delete(Long id);
+        
+        public Bodega findByProductoAndSucursal(Producto producto, Sucursal sucursal);
 	
 
 }

@@ -31,10 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bolsadeideas.springboot.sistema.app.entity.Sucursal;
 
 import com.bolsadeideas.springboot.sistema.app.services.ISucursalService;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
-@CrossOrigin(origins = { "*" })
+@CrossOrigin(
+        origins="*", 
+        methods={RequestMethod.GET,RequestMethod.POST}
+    )
 @RestController
 @RequestMapping("/api")
 public class SucursalRestController {

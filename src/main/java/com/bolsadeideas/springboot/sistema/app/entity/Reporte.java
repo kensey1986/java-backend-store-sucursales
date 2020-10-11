@@ -40,6 +40,9 @@ public class Reporte implements Serializable {
 	@Size(min = 3, max = 20, message = "el tamaño debe estar entre 3 y 20 caracteres")
 	@Column(nullable = false)*/
     private String descripcion;
+    
+    @Column(name = "precio_compra")
+    private Double precioCompra;
 
     //@NotNull(message = "No Hay Usuario valido")
     @OneToOne(fetch = FetchType.LAZY)
@@ -68,7 +71,7 @@ public class Reporte implements Serializable {
      */
     @JsonIgnoreProperties(value = {"reportes", "hibernateLazyInitializer", "handler"}, allowSetters = true)
     @ManyToOne(fetch = FetchType.LAZY)
-    private Producto producto;
+    private Bodega bodega;
 
     public Long getId() {
         return id;
@@ -127,14 +130,24 @@ public class Reporte implements Serializable {
         this.fechaModificado = fechaModificado;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public Bodega getBodega() {
+        return bodega;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setBodega(Bodega bodega) {
+        this.bodega = bodega;
     }
 
+    public Double getPrecioCompra() {
+        return precioCompra;
+    }
+
+    public void setPrecioCompra(Double precioCompra) {
+        this.precioCompra = precioCompra;
+    }
+    
+    
+    
     // < -- metodos get y set Fin-->
     private static final long serialVersionUID = 1L;
 

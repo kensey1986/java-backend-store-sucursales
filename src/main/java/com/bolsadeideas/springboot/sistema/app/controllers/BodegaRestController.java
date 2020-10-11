@@ -29,7 +29,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bolsadeideas.springboot.sistema.app.entity.Bodega;
+import com.bolsadeideas.springboot.sistema.app.entity.Factura;
+import com.bolsadeideas.springboot.sistema.app.entity.Producto;
+import com.bolsadeideas.springboot.sistema.app.entity.Sucursal;
 import com.bolsadeideas.springboot.sistema.app.services.IBodegaService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @CrossOrigin(origins = {"*"})
 @RestController
@@ -177,6 +184,13 @@ public class BodegaRestController {
         response.put("mensaje", "Sucursal eliminado con éxito!");
 
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+    
+    @GetMapping("/bodegas/producto/{dato1}/sucursal/{dato2}")
+    @ResponseStatus(HttpStatus.OK)
+    public Bodega findByProductoAndSucursal(@PathVariable  Producto dato1, @PathVariable  Sucursal dato2) {
+      
+        return bodegaService.findByProductoAndSucursal(dato1, dato2);
     }
 
 }

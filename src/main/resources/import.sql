@@ -13,7 +13,7 @@ INSERT INTO sucursales (id, nombre, nit, direccion, telefono, celular1, celular2
 INSERT INTO productos (id, codigo, create_at, descripcion, foto, nombre ) VALUES (1,  '555', '2020-09-04', 'sdfsd', NULL, 'zapatos');
 INSERT INTO productos (id, codigo, create_at, descripcion, foto, nombre ) VALUES (2,  '550', '2020-09-05', 'sdfsd', NULL, 'sandalias');
 
-
+INSERT INTO bodegas (id, cantidad, create_at, fecha_actualizacion, id_compuesto, nombre, precio_compra, precio_venta, producto_id, sucursal_id) VALUES (1, 10, '2020-10-07', NULL, '12', 'Bulevar', 1500, 2000, 2, 1);
 
 /* Populate tabla usuarios roles */
 
