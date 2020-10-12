@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-10-2020 a las 04:24:01
+-- Tiempo de generación: 12-10-2020 a las 05:03:50
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -45,7 +45,8 @@ CREATE TABLE `bodegas` (
 --
 
 INSERT INTO `bodegas` (`id`, `cantidad`, `create_at`, `fecha_actualizacion`, `id_compuesto`, `nombre`, `precio_compra`, `precio_venta`, `producto_id`, `sucursal_id`) VALUES
-(1, 10, '2020-10-07', NULL, '12', 'Bulevar', 1500, 2000, 2, 1);
+(1, 10, '2020-10-07', NULL, '12', 'Bulevar', 1200, 2000, 2, 1),
+(2, 10, '2020-10-08', NULL, '22', 'Alejandria', 1700, 2000, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -105,6 +106,8 @@ CREATE TABLE `facturas` (
 CREATE TABLE `facturas_items` (
   `id` bigint(20) NOT NULL,
   `cantidad` int(11) DEFAULT NULL,
+  `des_dinero` double DEFAULT NULL,
+  `des_porcentaje` double DEFAULT NULL,
   `importe` double DEFAULT NULL,
   `precio_comprado` double DEFAULT NULL,
   `precio_vendido` double DEFAULT NULL,
@@ -386,7 +389,7 @@ ALTER TABLE `usuarios_roles`
 -- AUTO_INCREMENT de la tabla `bodegas`
 --
 ALTER TABLE `bodegas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`

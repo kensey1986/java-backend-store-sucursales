@@ -186,11 +186,46 @@ public class BodegaRestController {
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }
     
-    @GetMapping("/bodegas/producto/{dato1}/sucursal/{dato2}")
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
+    @GetMapping("/bodegas/idCompuesto/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Bodega findByProductoAndSucursal(@PathVariable  Producto dato1, @PathVariable  Sucursal dato2) {
+    public Bodega findByIdCompuesto(@PathVariable  String id) {
       
-        return bodegaService.findByProductoAndSucursal(dato1, dato2);
+        return bodegaService.findByIdCompuesto(id);
+    }
+    
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
+    @GetMapping("/productos/create/fecha1/{f1}/fecha2/{f2}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Bodega> findByCreateAtBetween(@PathVariable String f1, @PathVariable String f2) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha1 = null;
+        Date fecha2 = null;
+        try {
+            fecha1 = formato.parse(f1);
+            fecha2 = formato.parse(f2);
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+
+        return bodegaService.findByCreateAtBetween(fecha1, fecha2);
+    }
+    
+    @Secured({"ROLE_ADMIN", "ROLE_USER"})
+    @GetMapping("/productos/actual/fecha1/{f1}/fecha2/{f2}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Bodega> findByFechaActualizacionBetween(@PathVariable String f1, @PathVariable String f2) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha1 = null;
+        Date fecha2 = null;
+        try {
+            fecha1 = formato.parse(f1);
+            fecha2 = formato.parse(f2);
+        } catch (ParseException ex) {
+            System.out.println(ex);
+        }
+
+        return bodegaService.findByFechaActualizacionBetween(fecha1, fecha2);
     }
 
 }

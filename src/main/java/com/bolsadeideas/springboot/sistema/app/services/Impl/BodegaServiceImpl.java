@@ -54,8 +54,23 @@ public class BodegaServiceImpl implements IBodegaService {
     //return productoDao.findByNombreStartingWithIgnoreCase(term);
 
     @Override
-    public Bodega findByProductoAndSucursal(Producto producto, Sucursal sucursal) {
-        return bodegaDao.findByProductoAndSucursal(producto, sucursal);
-         
+    @Transactional(readOnly = true)
+    public Bodega findByIdCompuesto(String idCompuesto) {
+            return bodegaDao.findByIdCompuesto(idCompuesto);
+    }    
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Bodega> findByCreateAtBetween(Date f1, Date f2) {
+       return bodegaDao.findByCreateAtBetween(f1, f2);
     }
+
+    @Override
+    public List<Bodega> findByFechaActualizacionBetween(Date f1, Date f2) {
+       return bodegaDao.findByFechaActualizacionBetween(f1, f2);
+    }
+
+   
+
+   
 }

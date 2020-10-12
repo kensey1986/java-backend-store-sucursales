@@ -26,7 +26,10 @@ public interface IBodegaService {
 	
 	public void delete(Long id);
         
-        public Bodega findByProductoAndSucursal(Producto producto, Sucursal sucursal);
 	
-
+        public Bodega findByIdCompuesto(String idCompuesto);
+        
+        public List<Bodega> findByCreateAtBetween(Date f1, Date f2);
+        
+         public List<Bodega> findByFechaActualizacionBetween(Date f1, Date f2);
 }

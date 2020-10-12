@@ -34,6 +34,12 @@ public class ItemFactura implements Serializable {
 
     @Column(name = "precio_comprado")
     private Double precioComprado;
+    
+    @Column(name = "des_porcentaje")
+    private Double desPorcentaje;
+    
+    @Column(name = "des_dinero")
+    private Double desDinero;
 
     private Double importe;
 
@@ -99,6 +105,23 @@ public class ItemFactura implements Serializable {
         this.importe = importe;
     }
 
+    public Double getDesPorcentaje() {
+        return desPorcentaje;
+    }
+
+    public void setDesPorcentaje(Double desPorcentaje) {
+        this.desPorcentaje = desPorcentaje;
+    }
+
+    public Double getDesDinero() {
+        return desDinero;
+    }
+
+    public void setDesDinero(Double desDinero) {
+        this.desDinero = desDinero;
+    }
+
+    
     // < -- metodos get y set Fin-->
     private static final long serialVersionUID = 1L;
 }
